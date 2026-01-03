@@ -1,23 +1,491 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
+
+    <!-- Schema Markup for enhanced search snippets -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Service",
+      "serviceType": "포항 이사 서비스",
+      "provider": {
+        "@type": "Organization",
+        "name": "포항이사전문가",
+        "url": "https://yourdomain.com",
+        "logo": "https://yourdomain.com/logo.png"
+      },
+      "areaServed": {
+        "@type": "State",
+        "name": "경상북도 포항시"
+      },
+      "description": "포항 지역 맞춤형 포장이사, 반포장이사, 일반이사 서비스를 제공하며, 합리적인 견적을 제시합니다.",
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "포항 이사 서비스 가격대",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "포항 포장이사"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "500000",
+              "priceCurrency": "KRW",
+              "description": "포항 내 포장, 운반, 정리 정돈 포함 서비스"
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Product",
+              "name": "포항 반포장이사"
+            },
+            "priceSpecification": {
+              "@type": "PriceSpecification",
+              "price": "400000",
+              "priceCurrency": "KRW",
+              "description": "포항 내 포장 및 운반 서비스 (정리 고객)"
+            }
+          }
+        ]
+      },
+      "url": "https://yourdomain.com"
+    }
+    </script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+        /* Reset and Base Styles */
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.7;
+            background-color: #f7f9fc; /* Soft gray background */
+            color: #333;
+            font-size: 16px;
+        }
+        main {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+        h1, h2, h3, h4 {
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: -0.5px;
+        }
+        h1 { font-size: 2.8rem; text-align: center; color: #2c3e50; margin-bottom: 0.5rem; }
+        h2 { font-size: 2rem; color: #007bff; border-bottom: 3px solid #007bff; padding-bottom: 0.5rem; margin-top: 2.5rem; }
+        h3 { font-size: 1.5rem; color: #34495e; margin-top: 2rem; }
+        p, ul, ol, dl { margin-bottom: 1.5rem; }
+        ul, ol { padding-left: 20px; }
+        li { margin-bottom: 0.8rem; }
+        a { color: #007bff; text-decoration: none; transition: color 0.3s ease; }
+        a:hover { color: #0056b3; text-decoration: underline; }
+
+        /* Header Specific Styles */
+        header {
+            background-color: #007bff;
+            color: white;
+            padding: 3rem 1rem;
+            text-align: center;
+            border-bottom: 8px solid #0056b3;
+        }
+        header p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+        nav { margin-top: 2rem; }
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            padding: 0;
+            gap: 2rem;
+        }
+        nav a {
+            color: white;
+            font-weight: 500;
+            font-size: 1.1rem;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            transition: background-color 0.3s ease;
+        }
+        nav a:hover { background-color: rgba(255, 255, 255, 0.3); }
+
+        /* Section Specific Styles */
+        section {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2.5rem;
+        }
+        .info-box {
+            background-color: #eaf4ff;
+            border-left: 5px solid #007bff;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+        }
+
+        /* Table Styles */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            font-size: 1rem;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 1rem;
+            text-align: left;
+        }
+        th {
+            background-color: #f1f1f1;
+            font-weight: 700;
+        }
+        table.cost-table th { background-color: #007bff; color: white; }
+        table.cost-table tr:nth-child(even) { background-color: #f7f9fc; }
+        .price-highlight {
+            font-weight: 700;
+            color: #d9534f; /* Reddish highlight for prices */
+            font-size: 1.1rem;
+        }
+
+        /* List Styles */
+        .check-list li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 10px;
+        }
+        .check-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745; /* Green checkmark */
+            font-weight: 700;
+        }
+
+        /* Accordion Styles */
+        dl dt {
+            cursor: pointer;
+            padding: 1rem 1.5rem;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            margin-top: 0.5rem;
+            font-weight: 500;
+            border: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        dl dt:hover { background-color: #f0f0f0; }
+        dl dt.active { background-color: #eaf4ff; border-color: #007bff; }
+        dl dd {
+            padding: 1.5rem;
+            background-color: #ffffff;
+            border-radius: 8px;
+            border: 1px solid #eee;
+            margin: 0;
+            margin-top: -1px;
+            display: none; /* Hidden by default */
+        }
+        dl dt.active + dd { display: block; }
+
+        /* Call to Action (CTA) Button */
+        .cta-button {
+            display: block;
+            background-color: #ff6f61; /* Accent color */
+            color: white;
+            font-weight: 700;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-align: center;
+            text-decoration: none;
+            margin: 3rem auto;
+            max-width: 350px;
+            box-shadow: 0 4px 12px rgba(255, 111, 97, 0.3);
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .cta-button:hover {
+            background-color: #e65c52;
+            transform: translateY(-2px);
+        }
+
+        /* Form Styles */
+        form {
+            background-color: #f9f9f9;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+        .submit-button {
+            background-color: #28a745; /* Submit button color */
+            color: white;
+            font-weight: 700;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        .submit-button:hover { background-color: #218838; }
+
+        /* Footer Styles */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #e9ecef;
+            margin-top: 2rem;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.6rem; }
+            h3 { font-size: 1.3rem; }
+            nav ul { flex-direction: column; gap: 0.5rem; }
+            nav a { padding: 0.5rem; }
+            section { padding: 1.5rem; }
+            th, td { padding: 0.8rem; font-size: 0.9rem; }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>포항이사비용: 2026년 포항 포장이사 견적 완벽 가이드</h1>
+        <p>포항 북구, 남구 전문 이사 서비스로 합리적인 가격과 최고의 만족을 경험하세요.</p>
+        <nav>
+            <ul>
+                <li><a href="#costfactors">비용 분석</a></li>
+                <li><a href="#localguide">지역별 안내</a></li>
+                <li><a href="#quoteform">견적 문의</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </nav>
+    </header>
+
     <main>
-      <h1>Home page</h1>
+        <section id="introduction">
+            <h2>포항이사비용, 왜 다를까요?</h2>
+            <p><strong>포항이사비용</strong>을 검색하며 여러 업체의 견적을 받아보면 가격 차이가 천차만별인 것을 경험하셨을 것입니다. 단순히 이삿짐센터마다 가격을 다르게 부른다고 생각하기 쉽지만, 이사 비용은 <strong>운반할 짐의 양, 이사 거리, 작업 환경, 서비스 옵션, 이사 날짜</strong> 등 여러 요인에 의해 복합적으로 결정됩니다. 포항 지역 전문 업체로서, 저희는 고객님께 투명하고 합리적인 <strong>포항 포장이사 비용</strong> 산정 기준을 알려드리고, 가장 효율적인 이사 방법을 제안해 드립니다. 특히 2026년에는 인건비와 유가 상승으로 인한 변동 요인이 있을 수 있으므로, 정확한 견적을 위한 전문가 상담이 필수입니다.</p>
+
+            <h3>이사 유형별 포항 이사 비용 대략적인 시세 (2026년 기준)</h3>
+            <div class="info-box">
+                <p><strong>주의:</strong> 아래 비용은 짐량, 거리, 날짜에 따라 크게 달라질 수 있는 포항 지역의 대략적인 평균 시세입니다. 정확한 견적은 현장 방문을 통해 확인해야 합니다.</p>
+            </div>
+            <table class="cost-table">
+                <thead>
+                    <tr>
+                        <th>이사 유형</th>
+                        <th>짐량 (예시)</th>
+                        <th>포항 내 이동 대략 비용 (평일 기준)</th>
+                        <th>서비스 내용</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>포항 포장이사</strong></td>
+                        <td>5톤 (아파트 30평대)</td>
+                        <td><span class="price-highlight">120만원 ~ 180만원</span></td>
+                        <td>포장, 운반, 배치, 청소 및 정리 정돈 서비스 제공.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>포항 반포장이사</strong></td>
+                        <td>5톤 (아파트 30평대)</td>
+                        <td><span class="price-highlight">90만원 ~ 130만원</span></td>
+                        <td>큰 짐 포장 및 운반, 잔짐 포장 및 정리 고객 직접 처리.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>포항 일반이사</strong></td>
+                        <td>2.5톤 (원룸/소형)</td>
+                        <td><span class="price-highlight">40만원 ~ 60만원</span></td>
+                        <td>모든 짐 포장 및 정리 고객 직접 처리, 운반만 업체가 진행.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="costfactors">
+            <h2>이사 비용을 결정하는 5가지 핵심 요소</h2>
+            <p><strong>포항이사비용</strong>을 결정하는 데 있어 가장 중요한 요소들을 자세히 분석하여, 고객님께서 합리적인 견적을 받는 데 도움을 드리고자 합니다. 이사 비용은 단순히 '짐이 많다' 또는 '거리가 멀다'는 식의 단순한 논리로만 결정되지 않으며, 아래와 같은 세부적인 고려사항들이 복합적으로 작용합니다.</p>
+
+            <h3>1. 짐의 양과 차량 크기 (톤수)</h3>
+            <p>가장 기본이 되는 요소입니다. 짐의 양이 많을수록 더 큰 차량(용달차)이 필요하며, 인력도 추가됩니다. 포항 지역에서는 <strong>포항원룸이사</strong>나 <strong>포항투룸이사</strong> 시 1톤 용달이나 2.5톤 트럭이 주로 사용되며, <strong>포항아파트이사</strong> 시에는 5톤에서 7톤 트럭이 일반적입니다. 짐이 애매하게 많은 경우, 예를 들어 4.5톤 정도의 짐을 5톤으로 견적 받으면 비용이 불필요하게 상승할 수 있습니다. 짐의 양을 정확하게 파악하고 적절한 톤수를 선택하는 것이 중요합니다.</p>
+
+            <h3>2. 이사 서비스 형태 (포장/반포장/일반)</h3>
+            <ul>
+                <li><strong>포항 포장이사:</strong> 포항 지역에서 가장 선호되는 서비스입니다. 포장부터 운반, 배치, 마무리 청소까지 모든 것을 업체가 책임집니다. 고객은 최소한의 감독만 하면 됩니다. 바쁜 직장인이나 신혼부부에게 적합하며, 비용은 가장 높지만 만족도가 높습니다.</li>
+                <li><strong>포항 반포장이사:</strong> 비용을 절감하면서도 기본적인 도움을 받고 싶을 때 선택합니다. 업체가 큰 짐(가구, 가전)을 포장하고 운반하며, 잔짐(주방 용품, 옷)은 고객이 직접 포장하고 정리하는 방식입니다. 포항 반포장이사는 포장이사 대비 20~30% 정도 저렴합니다.</li>
+                <li><strong>포항 일반이사:</strong> 고객이 모든 포장과 정리를 담당하고, 업체는 운반만 제공합니다. 비용은 가장 저렴하지만, 시간과 노력이 많이 소요됩니다. <strong>포항용달이사</strong> 또는 <strong>포항1톤이사</strong> 시 주로 적용됩니다.</li>
+            </ul>
+
+            <h3>3. 이사 거리 및 이동 경로 (장거리 vs. 단거리)</h3>
+            <p>이사 거리가 멀어질수록 유류비와 인건비(왕복 시간)가 증가하여 비용이 상승합니다. 포항 내에서 이동하는 단거리 이사와, 포항에서 서울, 부산, 대구 등 타 지역으로 이동하는 <strong>포항장거리이사</strong>의 비용 산정 방식이 다릅니다. 특히 포항은 경상북도 동해안에 위치해 있어 타 지역과의 이동 거리가 긴 편이므로, 장거리 이사 시 견적을 꼼꼼히 비교해야 합니다. 예를 들어, 포항 남구에서 북구로 이사하는 경우와 포항에서 경기도 성남으로 이사하는 경우의 비용 차이는 인력비 외에도 차량 운행 비용에서 크게 발생합니다.</p>
+
+            <h3>4. 작업 환경 (층수, 사다리차, 엘리베이터)</h3>
+            <p>이삿짐을 운반하는 환경에 따라 추가 비용이 발생합니다. 사다리차 사용은 비용이 추가되지만, 이삿짐 운반 시간을 단축시키고 파손 위험을 줄여줍니다. 포항 아파트나 빌라 이사 시 엘리베이터 사용 가능 여부, 계단 운반 시 인력 추가 필요 여부 등이 중요한 변수입니다. 특히 <strong>포항이사</strong> 시 사다리차 진입이 어려운 좁은 골목이나 저층 빌라의 경우, 인력으로 운반하게 되면 시간당 인건비가 추가될 수 있습니다. 2026년 기준 사다리차 이용 비용은 층수와 시간에 따라 10만원에서 30만원 이상 발생할 수 있습니다.</p>
+
+            <h3>5. 이사 날짜 및 시기 (손 없는 날, 주말, 성수기)</h3>
+            <p>이사 날짜는 비용에 가장 큰 영향을 미치는 요인 중 하나입니다. 많은 사람이 선호하는 <strong>손 없는 날</strong>(음력 9, 10, 19, 20, 29, 30일)과 주말에는 이사 수요가 집중되어 평일 대비 10~20%의 추가 비용이 발생합니다. 특히 <strong>포항이사 성수기</strong>인 2~3월(봄 이사철)이나 11~12월(겨울 방학 및 연말)에는 수요가 폭증하므로, 이 시기를 피하면 비용을 절감할 수 있습니다. 반면, 이사 비수기인 장마철이나 한여름에는 상대적으로 저렴한 견적을 받을 수 있습니다.</p>
+
+        </section>
+
+        <section id="localguide">
+            <h2>포항 지역별 이사 특징 및 전문성 분석 (북구 vs. 남구)</h2>
+            <p>포항시는 크게 북구와 남구로 나뉘며, 각 지역의 지리적 특성과 주거 환경에 따라 이사 비용과 난이도에 차이가 있습니다. <strong>포항 북구 이사</strong>와 <strong>포항 남구 이사</strong>를 계획하고 있다면, 각 지역의 특징을 미리 파악하는 것이 중요합니다.</p>
+
+            <h3>포항 북구 이사 (흥해읍, 장성동, 양덕동, 환호동 등)</h3>
+            <p><strong>포항 북구</strong>는 상대적으로 신도심 개발이 활발하게 이루어진 지역입니다. 특히 <strong>양덕동</strong>, <strong>장성동</strong>, <strong>흥해읍</strong> 등은 최근 대규모 아파트 단지가 조성되면서 이사 수요가 높은 지역입니다. 신규 아파트 단지들은 엘리베이터나 사다리차 이용이 용이한 편이어서 작업 환경은 좋은 편입니다. 그러나 <strong>포항 양덕동</strong>이나 <strong>포항 장성동</strong> 등 신규 단지가 밀집한 지역은 이사 성수기에 사다리차 사용 예약이 어려울 수 있으므로 미리 확인해야 합니다.</p>
+            <p>북구의 다른 주요 동네로는 <strong>우현동</strong>, <strong>두호동</strong>, <strong>환호동</strong> 등이 있습니다. <strong>환호동</strong>은 영일대 해수욕장 주변에 위치해 있으며, <strong>우현동</strong>은 포항역과 가까워 편리성이 높습니다. <strong>죽도동</strong>은 포항의 구도심으로 좁은 골목길과 상가 건물이 많아 <strong>포항용달이사</strong>나 소규모 이사가 많습니다. 포항 북구 지역 전문 이사 업체는 이러한 지리적 특성을 고려하여 효율적인 동선을 계획합니다.</p>
+
+            <h3>포항 남구 이사 (효자동, 이동, 대이동, 문덕, 오천읍 등)</h3>
+            <p><strong>포항 남구</strong>는 포스코와 포항공대(POSTECH)가 위치한 산업 및 교육의 중심지입니다. <strong>효자동</strong>, <strong>이동</strong>, <strong>지곡동</strong> 등은 교육 환경과 생활 편의성이 높아 주거 선호도가 높은 지역입니다. 특히 <strong>포항 효자동</strong>은 아파트와 고급 빌라가 밀집해 있어 <strong>포항 포장이사</strong> 수요가 많습니다. <strong>지곡동</strong>은 포항공대 인근으로 <strong>포항원룸이사</strong>나 <strong>포항투룸이사</strong>가 잦은 지역입니다. 이 지역 이사 시에는 미리 관리사무소에 엘리베이터 사용을 예약해야 합니다.</p>
+            <p>남구의 외곽 지역인 <strong>오천읍</strong>과 <strong>문덕</strong>은 상대적으로 비용이 저렴한 주거 단지가 형성되어 있습니다. <strong>포항 문덕</strong>은 신흥 주거지로 <strong>포항이사</strong> 수요가 증가하고 있으며, <strong>포항 오천읍</strong>은 상대적으로 넓은 평수의 주택 이사가 많습니다. <strong>상대동</strong>, <strong>대도동</strong>, <strong>연일읍</strong> 등도 <strong>포항이사</strong>가 활발한 지역입니다. 남구 지역은 북구에 비해 도로 사정이 복잡하지 않아 운반에 용이하지만, 일부 구도심 지역은 진입로를 확인해야 합니다.</p>
+
+            <h3>포항 지역별 이사 짐량에 따른 적정 차량 톤수 가이드</h3>
+            <p>포항 지역에서 이사를 계획할 때, 짐량에 따라 적절한 차량 톤수를 선택하는 것이 중요합니다. 잘못된 선택은 추가 비용 발생이나 이사 지연을 초래합니다. <strong>포항 1톤이사</strong>는 원룸(1~2인 가구) 이사에 적합하며, <strong>포항 2.5톤이사</strong>는 1.5룸이나 짐이 많은 1인 가구, 2인 가구에 적합합니다. <strong>포항 5톤이사</strong>는 일반적인 30평대 아파트 이사에 표준적으로 사용됩니다.</p>
+            <p>포항 이사 시 발생하는 짐의 양을 정확하게 예측하기 어렵다면, 사전에 <strong>포항이사견적</strong> 업체를 통해 방문 견적을 받는 것이 가장 정확합니다. 짐량을 과대평가하면 불필요한 비용이 발생하고, 과소평가하면 이사 당일 추가 비용이 발생할 수 있습니다. 예를 들어, <strong>포항 양덕동</strong>의 아파트 짐이 예상보다 많아 5톤 차량이 부족할 경우, 추가 1톤 차량(용달차) 비용이 발생할 수 있습니다.</p>
+        </section>
+
+        <section id="quoteform">
+            <h2>정확한 포항이사비용 견적을 위한 문의 폼</h2>
+            <p>고객님의 이사 환경에 맞는 정확한 <strong>포항이사비용</strong>을 산출해 드립니다. 아래 정보를 입력해 주시면 전문가가 꼼꼼히 분석하여 맞춤형 견적을 무료로 제공합니다. 견적 요청은 고객님의 개인 정보 보호를 최우선으로 하며, 단순 문의만으로도 포항 지역 이사 노하우를 얻으실 수 있습니다.</p>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="movingDate">이사 희망 날짜:</label>
+                    <input type="date" id="movingDate" name="movingDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="movingType">이사 유형:</label>
+                    <select id="movingType" name="movingType" required>
+                        <option value="">선택하세요</option>
+                        <option value="packing">포장이사</option>
+                        <option value="halfpacking">반포장이사</option>
+                        <option value="general">일반이사</option>
+                        <option value="office">사무실/기업이사</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="currentAddress">현재 거주지 (출발지) 주소:</label>
+                    <input type="text" id="currentAddress" name="currentAddress" placeholder="예: 포항시 북구 장성동 123-45" required>
+                </div>
+                <div class="form-group">
+                    <label for="newAddress">이사할 거주지 (도착지) 주소:</label>
+                    <input type="text" id="newAddress" name="newAddress" placeholder="예: 포항시 남구 효자동 678-90" required>
+                </div>
+                <div class="form-group">
+                    <label for="currentSize">출발지 평형/짐량 (평/톤):</label>
+                    <input type="text" id="currentSize" name="currentSize" placeholder="예: 30평 아파트 / 짐량 5톤 예상">
+                </div>
+                <div class="form-group">
+                    <label for="contactNumber">연락처:</label>
+                    <input type="tel" id="contactNumber" name="contactNumber" placeholder="010-0000-0000" required>
+                </div>
+                <div class="form-group">
+                    <label for="comments">추가 요청사항 (예: 사다리차 필요, 귀중품 운반 등):</label>
+                    <textarea id="comments" name="comments" rows="4"></textarea>
+                </div>
+                <button type="submit" class="submit-button">견적 문의 신청하기</button>
+            </form>
+            <div class="info-box" style="margin-top: 2rem;">
+                <p><strong>참고:</strong> 위 견적 문의는 실시간 견적이 아닌 상담 요청입니다. 정확한 비용 산출을 위해 전문 상담사가 연락을 드릴 예정입니다. 문의 시 <strong>포항이사비용</strong> 절감 팁도 함께 안내해 드립니다.</p>
+            </div>
+        </section>
+
+        <section id="faq">
+            <h2>자주 묻는 질문 (FAQ)</h2>
+            <p><strong>포항이사비용</strong> 및 준비 과정에서 궁금해하는 점들을 모았습니다. 아래 질문들을 확인하시면 이사 준비에 도움이 될 것입니다.</p>
+            <dl>
+                <dt tabindex="0" aria-expanded="false" class="accordion-title">Q1. 이사 당일 추가 비용이 발생할 수 있나요?</dt>
+                <dd class="accordion-content">네, 현장 상황에 따라 추가 비용이 발생할 수 있습니다. 예를 들어, 계약 시 짐량보다 실제 짐이 많아 차량이나 인력이 추가되어야 하는 경우, 사다리차 사용이 불가하여 인력으로 운반해야 하는 경우, 폐기물 처리나 에어컨 설치 등의 부가 서비스가 추가될 경우 등입니다. 정확한 견적을 위해 현장 방문 견적을 받는 것이 중요하며, 계약서에 추가 비용 발생 가능 항목을 명확히 명시해야 합니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false" class="accordion-title">Q2. 포장이사 업체 선정 시 가장 중요한 기준은 무엇인가요?</dt>
+                <dd class="accordion-content">포항 지역 이사 업체를 선정할 때는 단순히 가격이 저렴한 곳을 선택하기보다, <strong>신뢰성</strong>과 <strong>전문성</strong>을 확인해야 합니다. <strong>화물자동차 운수사업법</strong>에 따른 허가업체인지, <strong>적재물 배상책임보험</strong>에 가입되어 있는지 확인해야 합니다. 포항 지역 전문 업체라면 해당 지역의 아파트 및 빌라 구조, 교통 상황 등을 잘 알고 있어 더욱 효율적인 이사를 진행할 수 있습니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false" class="accordion-title">Q3. 이사할 때 사다리차를 반드시 사용해야 하나요?</dt>
+                <dd class="accordion-content">필수 사항은 아니지만, 사다리차를 사용하면 이사 시간 단축, 짐 파손 위험 감소, 인력 절감 효과 등 여러 이점이 있습니다. 특히 포항 아파트 고층 이사 시에는 사다리차 사용이 일반적입니다. 사다리차 비용이 부담된다면 저층 이사 시에는 인력 운반을 고려해 볼 수 있지만, 짐량이 많거나 계단이 좁은 경우 인력 비용이 더 높아질 수 있습니다.</dd>
+
+                <dt tabindex="0" aria-expanded="false" class="accordion-title">Q4. 이사 견적은 언제 받는 것이 가장 좋을까요?</dt>
+                <dd class="accordion-content">이사 날짜가 확정되면 최소 2주 전, 성수기(2~3월)에는 3~4주 전에 미리 견적을 받고 업체를 예약하는 것이 좋습니다. 특히 <strong>손 없는 날</strong>이나 주말 이사라면 서둘러 예약해야 원하는 시간대에 서비스를 이용할 수 있습니다. 여러 업체에 견적을 받아 비교하고, 방문 견적을 통해 짐량을 정확히 확인하는 과정을 거쳐야 합리적인 <strong>포항이사비용</strong>을 결정할 수 있습니다.</dd>
+            </dl>
+        </section>
+
+        <section class="external-links">
+            <h2>신뢰성 있는 이사 관련 정보 (외부 자료)</h2>
+            <p><strong>포항이사비용</strong>과 관련 법규, 소비자 보호 기준 등에 대해 더 자세히 알아보세요. 신뢰할 수 있는 외부 링크를 통해 안전한 이사를 준비할 수 있습니다.</p>
+            <ul>
+                <li><a href="https://www.ftc.go.kr/www/cpw/service/selectBusi.do?key=670&busiType=08" target="_blank">공정거래위원회 - 이사화물 표준약관 확인</a></li>
+                <li><a href="https://www.molit.go.kr/USR/policyData/m_20/dtl.jsp?idx=13217" target="_blank">국토교통부 - 이사화물 운송 주선업 허가 관련 정보</a></li>
+                <li><a href="https://namu.wiki/w/%ED%8F%AC%EC%9E%A5%EC%9D%B4%EC%82%AC" target="_blank">나무위키 - 포장이사 관련 일반 정보</a></li>
+                <li><a href="https://consumer.go.kr/consumer/bbs/selectBbsNttView.do?bbsId=BBSMSTR_000000000001&nttId=16209" target="_blank">한국소비자원 - 이사화물 운송 시 소비자 유의사항</a></li>
+                <li><a href="https://www.gimhae.go.kr/portal/saeol/view/board/list.do?p_idx=34&c_idx=110" target="_blank">포항시 폐기물 처리 및 대형폐기물 스티커 구매 안내 (참고용)</a></li>
+            </ul>
+        </section>
+
+        <section id="contact">
+            <h2>포항이사 전문가와 상담하기</h2>
+            <p><strong>포항이사비용</strong>에 대한 궁금증을 전문가에게 직접 문의하세요. 저희는 포항 북구(장성동, 양덕동, 흥해읍, 두호동, 우현동)와 남구(효자동, 이동, 문덕, 오천읍, 지곡동) 전역에서 합리적이고 안전한 이사 서비스를 제공합니다.</p>
+            <ul>
+                <li><strong>전화 상담:</strong> <a href="tel:01012345678">010-1234-5678</a> (24시간 상담 가능)</li>
+                <li><strong>이메일 문의:</strong> <a href="mailto:contact@yourdomain.com">contact@yourdomain.com</a></li>
+            </ul>
+        </section>
     </main>
-  </body>
-</html>
+
+    <footer>
+        <p>Copyright &copy; 2026 포항이사전문가. All rights reserved.</p>
+        <p>사업자등록번호: 123-45-67890 | 주소: 경상북도 포항시 북구 xx로 123 | 대표: 홍길동</p>
+    </footer>
+
+    <script>
+        // FAQ 아코디언 기능 (접기/펼치기)
+        document.querySelectorAll('dl dt').forEach((dt) => {
+            dt.addEventListener('click', () => {
+                const isActive = dt.classList.contains('active');
+                // 모든 dd 요소를 숨기고 active 클래스 제거
+                document.querySelectorAll('dl dt').forEach(item => {
+                    item.classList.remove('active');
+                    item.setAttribute('aria-expanded', 'false');
+                    item.nextElementSibling.style.display = 'none';
+                });
+                // 클릭된 dt의 dd를 보여주고 active 클래스 추가 (토글)
+                if (!isActive) {
+                    dt.classList.add('active');
+                    dt.setAttribute('aria-expanded', 'true');
+                    dt.nextElementSibling.style.display = 'block';
+                }
+            });
+            dt.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    dt.click();
+                }
+            });
+        });
+    </script>
+
+
+  
